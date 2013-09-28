@@ -1,0 +1,3 @@
+requires:
+- pyserial
+- xively-python

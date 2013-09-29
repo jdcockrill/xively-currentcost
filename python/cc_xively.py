@@ -9,9 +9,12 @@ import traceback
 import sys
 import datetime
 import os
+import yaml
 
-API_KEY=os.environ['API_KEY']
-FEED_ID=os.environ['FEED_ID']
+CONFIG_DIR="/etc/xively-currentcost"
+
+API_KEY=''
+FEED_ID=''
 
 T_STREAM="temperature_sensor"
 W_STREAM="electricity_sensor"
@@ -20,12 +23,13 @@ temp_pat=re.compile(r"<tmpr>\d{1,2}\.\d")
 watt_pat=re.compile(r"<watts>\d{5}")
 
 def get_datastream(feed, stream):
+  logger = logging.getLogger('xively')
   try:
     datastream = feed.datastreams.get(stream)
-    print "Found existing stream:", stream
+    logger.info("Found existing stream: %s" % stream)
     return datastream
   except:
-    print "Stream not found:", stream
+    logger.exception("Stream not found: %s" % stream)
     raise
 
 class StreamHandler:
@@ -104,6 +108,12 @@ if __name__ == "__main__":
   logging.config.fileConfig(CONFIG_DIR + '/logging.conf')
   rlogger = logging.getLogger('root')
   rlogger.info("cc_xively started")
+ 
+  with open(CONFIG_DIR + '/xively.conf') as f:
+    data = yaml.load(f.read())
+    API_KEY = data['API_KEY']
+    FEED_ID = data['FEED_ID']
+ 
   main()
 
 # test data (should probably make a unit test with this)

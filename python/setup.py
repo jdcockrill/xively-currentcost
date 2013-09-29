@@ -1,4 +1,3 @@
-import os
 from setuptools import setup
 
 setup(
@@ -10,10 +9,10 @@ setup(
   license = "MIT",
   keywords = "currentcost xively raspberrypi",
   scripts = ["cc_xively.py"],
-  data_files = [('/etc/init.d','init.d/cc_xively'),
-                ('/etc/xively-currentcost', 'logging.conf'),
+  data_files = [('/etc/init.d',['init.d/cc_xively']),
+                ('/etc/xively-currentcost', ['logging.conf', 'xively.conf']),
                ],
-  install_requires = ['xively-python>=0.1.0-rc1','pyserial>=2.5'],
+  install_requires = ['xively-python>=0.1.0-rc1','pyserial>=2.5', 'pyyaml>=3.10'],
   classifiers = [
     "Development Status :: 3 - Alpha",
     "Topic :: Utilities",

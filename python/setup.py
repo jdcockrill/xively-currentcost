@@ -9,12 +9,11 @@ setup(
   description = ("Some code hacked together that I use with a Raspberry Pi to read a CurrentCost energy monitor's serial output and post to Xively"),
   license = "MIT",
   keywords = "currentcost xively raspberrypi",
-  packages = ['cc_xively'],
-  scripts = ["sh/cc_xively"]
-  package_data = {
-    '': ['*.cfg', '*.txt']
-  },
-  install_requires = ['xively-python>=0.1.0-rc1','pyserial>=2.5']
+  scripts = ["cc_xively.py"],
+  data_files = [('/etc/init.d','init.d/cc_xively'),
+                ('/etc/xively-currentcost', 'logging.conf'),
+               ],
+  install_requires = ['xively-python>=0.1.0-rc1','pyserial>=2.5'],
   classifiers = [
     "Development Status :: 3 - Alpha",
     "Topic :: Utilities",

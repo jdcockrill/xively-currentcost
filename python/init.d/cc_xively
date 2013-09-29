@@ -11,9 +11,20 @@
 ### END INIT INFO
 
 # Change the next 3 lines to suit where you install your script and what you want to call it
-DIR=/usr/sbin
+DIR=/usr/local/bin
 DAEMON=$DIR/cc_xively
 DAEMON_NAME=cc_xively
+
+FEED_ID=
+API_KEY=
+
+if [ -z $FEED_ID ]; then
+  echo "Please input FEED_ID to $0"
+  exit 1
+elif [ -z $API_KEY ]; then
+  echo "Please input API_KEY to $0"
+  exit 1
+fi
 
 # This next line determines what user the script runs as.
 # Root generally not recommended but necessary if you are using the Raspberry Pi GPIO from Python.

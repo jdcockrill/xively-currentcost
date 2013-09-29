@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import logging
+import logging.config
 import xively
 import serial
 import re
@@ -54,7 +56,8 @@ def get_streamhandler(feed, temp_stream, watt_stream):
   return handler
  
 def run(sr, handler):
-  sys.stdout.write("starting up\n")
+  logger = logging.getLogger("xively")
+  logger.info("Starting")
   count=-1
   try:
     while True:
@@ -69,17 +72,20 @@ def run(sr, handler):
             # extract the values
             temp=float(temp_pat.search(line).group(0)[6:])
             watts=int(watt_pat.search(line).group(0)[7:])
+            logger.debug("temp: " + str(temp))
+            logger.debug("watt: " + str(watts))
             # send the data
             handler.update_stream('temp', temp)
             handler.update_stream('watt', watts)
+            logger.debug("updates posted to xively")
           except AttributeError:
             pass
   except KeyboardInterrupt as ki:
     pass
   except Exception as e:
-    sys.stderr.write(traceback.format_exc())
+    logger.exception("Exception caught")
   finally:
-    sys.stderr.write("exiting\n")
+    logger.info("exiting")
     sr.close()
 
 def main():
@@ -95,6 +101,9 @@ def main():
   run(sr, handler)
 
 if __name__ == "__main__":
+  logging.config.fileConfig(CONFIG_DIR + '/logging.conf')
+  rlogger = logging.getLogger('root')
+  rlogger.info("cc_xively started")
   main()
 
 # test data (should probably make a unit test with this)

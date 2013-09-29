@@ -1,10 +1,8 @@
-Xively CurrentCost
-==================
+#Xively CurrentCost
 I had a CurrentCost energy monitor, a Raspberry Pi and an old Cosm (now Xively) account kicking around, so I thought I'd put them to good use. I started with a Raspberry Pi but in time I'd like to switch it for an Arduino and use the Pi as a central station for relaying data from a number of sensors, perhaps.
 
 
-Python
-------
+##Python
 
 Everything is in the python sub-directory. This script requires the following Python libraries:
 - pyserial
@@ -19,7 +17,13 @@ Lastly, you will probably work this out, but it expects there to be two channels
 
 There is an init.d script that is installed automatically as part of ```setup.py install```, so you should be able to start it with ```sudo service cc_xively start``` and check the logs in ```/var/log/xively.log```
 
-Arduino
--------
+###Final notes
+If you want it to automatically start on boot, run the following once you've run the Python install:
+
+```bash
+sudo update-rc.d cc_xively defaults
+```
+
+##Arduino
 
 To-do.

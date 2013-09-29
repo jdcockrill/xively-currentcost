@@ -82,7 +82,7 @@ def run(sr, handler):
     sys.stderr.write("exiting\n")
     sr.close()
 
-if __name__ == "__main__":
+def main():
   # Setup the serial port
   sr=serial.Serial('/dev/ttyAMA0', 57600)
   sr.open()
@@ -94,5 +94,9 @@ if __name__ == "__main__":
 
   run(sr, handler)
 
+if __name__ == "__main__":
+  main()
+
+# test data (should probably make a unit test with this)
 #<msg><src>CC128-v0.11</src><dsb>01075</dsb><time>09:33:50</time><tmpr>17.8</tmpr><sensor>0</sensor><id>03595</id><type>1</type><ch1><watts>00440</watts></ch1></msg>
 

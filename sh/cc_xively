@@ -1,0 +1,5 @@
+#!/bin/bash
+export FEED_ID=<YOUR FEED ID>
+export API_KEY=<YOUR API KEY>
+
+python /home/pi/xively_currentcost/cc_xivley.py >> /var/log/xively.out 2>&1

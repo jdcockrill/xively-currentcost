@@ -84,9 +84,11 @@ def run(sr, handler):
             logger.debug("updates posted to xively")
           except AttributeError:
             pass
+          except ConnectionError:
+            logger.exception("Connection error, probably rubbish wifi. Shall continue")
   except KeyboardInterrupt as ki:
     pass
-  except Exception as e:
+  except Exception:
     logger.exception("Exception caught")
   finally:
     logger.info("exiting")

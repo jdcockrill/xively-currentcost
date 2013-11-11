@@ -24,6 +24,8 @@ If you want it to automatically start on boot, run the following once you've run
 sudo update-rc.d cc_xively defaults
 ```
 
+I also have a CC128 model monitor, which uses pin 4 for GND and pin 8 for the TX part of the Serial communications. This is what you want to feed into the 'RX' pin on your Raspberry Pi.
+
 ##Arduino
 
 To-do.
